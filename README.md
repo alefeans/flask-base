@@ -1,17 +1,17 @@
 # Flask Base
 [![Python](https://img.shields.io/badge/python-3.7-blue.svg)]() [![Python](https://img.shields.io/badge/python-3.6-blue.svg)]() [![MIT License](https://img.shields.io/badge/license-MIT-007EC7.svg?style=flat)](/LICENSE)
 
-My __Flask__ base template using [Flask RESTPlus](https://flask-restplus.readthedocs.io/en/stable/index.html), [JWT Extended](https://flask-jwt-extended.readthedocs.io/en/latest/) and [PyMongo](https://flask-pymongo.readthedocs.io/en/latest/).
+My template base to build Flask RESTful APIs using [Flask RESTPlus](https://flask-restplus.readthedocs.io/en/stable/index.html), [JWT Extended](https://flask-jwt-extended.readthedocs.io/en/latest/) and [PyMongo](https://flask-pymongo.readthedocs.io/en/latest/).
 
 You can just clone this repo and start to create/customize your own RESTful API using this code as your template base :)
 
 ## JWT, PyMongo... Do i need all of this ???
 
-__NO !__ You can ditch JWT, PyMongo and Bcrypt (used for hashing users password on database), removing all the references on the [app](app/__init__.py) and the files that makes use of them.
+__NO !__ You can remove JWT, PyMongo and Bcrypt (used for hashing users password on database), excluding all the references on the [app](app/__init__.py) and the files that makes use of them.
 
-These codes are there just to help you if you need to implement all of the boilerplate needed to work with JWT, PyMongo and so on.
+These _"extensions"_ are there just to help you, if you need to implement all of the boilerplate needed to work with JWT, PyMongo and so on.
 
-Don't forget to remove the dependencies from [requirements.txt](requirements.txt) too :)
+Don't forget to remove the dependencies from [requirements.txt](requirements.txt) too.
 
 # Getting Started
 
@@ -73,7 +73,7 @@ The project structure is based on the official [Scaling your project](https://fl
 ### Folders
 
 * `app` - All the RESTful API implementation is here.
-* `app/helpers` - Useful function/class helpers for all modules.
+* `app/helpers` - Useful function/class helpers for all modules (you can remove the privileges file if you don't need this).
 * `app/v1` - Resource agroupment for all `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
 * `app/v1/resources` - All `v1` resources are implemented here.
 * `kubernetes` - Kubernetes yamls goes here.
