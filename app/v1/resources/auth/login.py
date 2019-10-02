@@ -21,7 +21,7 @@ class Login(Resource):
     }, security=None)
     def post(self):
         """
-        Login authentication endpoint
+        Authentication endpoint
         """
         username = api.payload.get('username')
         password = api.payload.get('password')
