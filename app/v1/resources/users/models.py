@@ -8,12 +8,12 @@ class Users:
     def __init__(self):
         pass
 
-    @classmethod
-    def get_all_users(cls):
-        return json.loads(dumps(mongo.db.users.find().sort([('name', 1)])))
+    @staticmethod
+    def get_all_users():
+        return json.loads(dumps(mongo.db.users.find().sort([('username', 1)])))
 
-    @classmethod
-    def get_user(cls, user):
+    @staticmethod
+    def get_user(user):
         user = mongo.db.users.find_one({'username': user})
         if user:
             return json.loads(dumps(user))
