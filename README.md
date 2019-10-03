@@ -124,7 +124,7 @@ The project structure is based on the official [Scaling your project](https://fl
 * `app/v1` - Resource agroupment for all `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
 * `app/v1/resources` - All `v1` resources are implemented here.
 * `tests/unit` - Unit tests modules executed on the CI/CD pipeline.
-* `tests/integration` - Integration tests modules executed before pushing changes to repo.
+* `tests/integration` - Integration tests modules executed using a fake database on the CI/CD pipeline.
 * `tests/fake_data` - Fake data files ("fixtures").
 
 ### Files
