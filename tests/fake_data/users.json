@@ -1,0 +1,10 @@
+[{
+	"username": "user",
+	"email": "user@user.com",
+	"password": "user"
+},
+{
+	"username": "fake",
+	"email": "fake@fake.com",
+	"password": "fakefake"
+}]

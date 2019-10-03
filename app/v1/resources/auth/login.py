@@ -1,8 +1,7 @@
-from bcrypt import checkpw
 from flask_restplus import Resource, Namespace
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_refresh_token_required, get_jwt_identity, get_jwt_claims
 from app import mongo, jwt
-from app.helpers import refresh_parser
+from app.helpers import refresh_parser, check_password
 from .serializers import login, full_token, acc_token
 
 api = Namespace('auth', 'Authentication')
@@ -31,7 +30,7 @@ class Login(Resource):
         if not user:
             api.abort(404, 'User not found')
 
-        if not checkpw(password.encode('utf-8'), user.get('password').encode('utf-8')):
+        if not check_password(password, user.get('password')):
             api.abort(401, 'Unauthorized')
 
         access_token = create_access_token(identity=user)

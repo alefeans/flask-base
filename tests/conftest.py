@@ -2,7 +2,7 @@ import json
 import pytest
 from app import create_app
 from flask_restplus import marshal
-from app.v1.resources.tribes.serializers import tribe
+from app.v1.resources.users.serializers import create_user
 
 
 @pytest.fixture
@@ -24,16 +24,16 @@ def json_headers(scope='session'):
 
 
 @pytest.fixture
-def tribe_list(scope='module'):
+def user_list(scope='module'):
     """
-    Reads the data from 'tribes.json' file,
-    marshalling with the 'tribe' serializer.
+    Reads the data from 'users.json' file,
+    marshalling with the 'create_user' serializer.
     In this way, we can assert that our fake test
     will produce the same fields of our serializer.
 
     Yields:
-        list: List of parsed tribes objects (dict).
+        list: List of parsed users objects (dict).
     """
-    with open('tests/fake_data/tribes.json', 'r') as fp:
+    with open('tests/fake_data/users.json', 'r') as fp:
         data = json.loads(fp.read())
-        yield marshal(data, tribe)
+        yield marshal(data, create_user)
