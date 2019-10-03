@@ -26,7 +26,7 @@ class UserList(Resource):
         422: 'Cannot create user',
         500: 'Internal Server Error'
     })
-    #s@jwt_required
+    @jwt_required
     def post(self):
         """
         Creates a new user
