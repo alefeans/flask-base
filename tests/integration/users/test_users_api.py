@@ -32,23 +32,28 @@ def test_if_get_single_users_without_jwt_fails(client):
 def test_create_and_delete_user_endpoints(mock_jwt_required, user_list, json_headers, client):
 
     def create_user(user):
+        user.pop('id')
         created = client.post('/api/v1/users/', data=json.dumps(user), headers=json_headers)
         assert created.status_code == 201
+
         conflict = client.post('/api/v1/users/', data=json.dumps(user), headers=json_headers)
         assert conflict.status_code == 409
+
+        user.pop('password')
+        user_id = created.json.pop('id')
+        assert user == created.json
+
         bad = client.post('/api/v1/users/', data=json.dumps({'name': 'bla'}), headers=json_headers)
         assert bad.status_code == 400
-        return created.json
 
-    def delete_user(user):
-        response = client.delete(f'/api/v1/users/{user.get("id")}', headers=json_headers)
+        return user_id
+
+    def delete_user(user_id):
+        response = client.delete(f'/api/v1/users/{user_id}', headers=json_headers)
         assert response.status_code == 204
-        response = client.delete(f'/api/v1/users/{user.get("id")}', headers=json_headers)
+        response = client.delete(f'/api/v1/users/{user_id}', headers=json_headers)
         assert response.status_code == 404
 
     for user in user_list:
-        user.pop('id')
-        result = create_user(user)
-        user.pop('password')
-        assert result == user
-        delete_user(result)
+        user_id = create_user(user)
+        delete_user(user_id)
