@@ -10,3 +10,5 @@ script:
   - tox -q
 before_script:
   - sleep 15
+after_success:
+  - codecov
