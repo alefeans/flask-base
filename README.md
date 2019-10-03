@@ -7,9 +7,9 @@ You can just clone this repo and start to create/customize your own RESTful API 
 
 ## JWT, PyMongo... Do i need all of this ???
 
-__NO !__ You can remove JWT, PyMongo and Bcrypt (used for hashing users password on database), excluding all the references on the [app](app/__init__.py) and the files that makes use of them.
+__NO !__ You can remove JWT, PyMongo and Bcrypt (used for hashing users password on database), excluding all the references on the [app](app/__init__.py), [config](config.py) and the files that makes use of them.
 
-These _"extensions"_ are there just to help you, if you need to implement all of the boilerplate needed to work with JWT, PyMongo and so on.
+These _"extensions"_ and the _users_ endpoints are there just to help you, if you need to implement all of the boilerplate required to work with JWT, PyMongo and so on.
 
 Don't forget to remove the dependencies from [requirements.txt](requirements.txt) too.
 
@@ -69,16 +69,60 @@ The project structure is based on the official [Scaling your project](https://fl
 
 
 ```
+.
+├── app
+│   ├── helpers
+│   │   ├── __init__.py
+│   │   ├── parsers.py
+│   │   └── password.py
+│   ├── __init__.py
+│   └── v1
+│       ├── __init__.py
+│       └── resources
+│           ├── auth
+│           │   ├── __init__.py
+│           │   ├── login.py
+│           │   └── serializers.py
+│           ├── __init__.py
+│           └── users
+│               ├── __init__.py
+│               ├── models.py
+│               ├── serializers.py
+│               └── user.py
+├── config.py
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── requirements.txt
+├── run.py
+├── tests
+│   ├── conftest.py
+│   ├── fake_data
+│   │   └── users.json
+│   ├── __init__.py
+│   ├── integration
+│   │   ├── __init__.py
+│   │   └── users
+│   │       ├── __init__.py
+│   │       └── test_users_api.py
+│   └── unit
+│       ├── helpers_test
+│       │   ├── __init__.py
+│       │   └── test_password.py
+│       ├── __init__.py
+│       └── users
+│           ├── __init__.py
+│           └── test_users.py
+└── tox.ini
 
 ```
 
 ### Folders
 
 * `app` - All the RESTful API implementation is here.
-* `app/helpers` - Useful function/class helpers for all modules (you can remove the privileges file if you don't need this).
+* `app/helpers` - Useful function/class helpers for all modules.
 * `app/v1` - Resource agroupment for all `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
 * `app/v1/resources` - All `v1` resources are implemented here.
-* `kubernetes` - Kubernetes yamls goes here.
 * `tests/unit` - Unit tests modules executed on the CI/CD pipeline.
 * `tests/integration` - Integration tests modules executed before pushing changes to repo.
 * `tests/fake_data` - Fake data files ("fixtures").
@@ -171,19 +215,19 @@ To run the automated tests:
 
 ```
 # rull all tests stages (with '-q' for a better output)
-tox
+tox -q
 
 # run unit tests with lint stage
-tox -- tests/unit
+tox -q -- tests/unit
 
 # run integration tests with lint stage
-tox -- tests/unit
+tox -q -- tests/unit
 
 # run only lint stage
-tox -e lint
+tox -q -e lint
 
 # skip lint stage (if u want integration, just modify the directory after '--')
-tox -e py37 -- tests/unit
+tox -q -e py37 -- tests/unit
 ```
 
 ## License
