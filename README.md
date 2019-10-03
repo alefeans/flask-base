@@ -32,7 +32,7 @@ pip install -r requirements.txt
 # if you are not using mongo and jwt, forget these exports
 export MONGO_URI="mongodb://<your_mongo_host>:27017/<your_database>"
 export JWT_SECRET_KEY="<randomic_key>"
-python main.py
+python run.py
 ```
 
 ## Docker
