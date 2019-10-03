@@ -62,7 +62,7 @@ class TokenRefresh(Resource):
 
 @jwt.user_claims_loader
 def add_claims_to_access_token(user):
-    return {'privilege': user['privilege']}
+    return {'privilege': user.get('privilege')}
 
 
 @jwt.user_identity_loader
