@@ -36,6 +36,7 @@ dictConfig({
 
 
 class BaseConfig:
+
     DEBUG = True
     RESTPLUS_VALIDATE = True
     JWT_CLAIMS_IN_REFRESH_TOKEN = True
@@ -52,6 +53,7 @@ class BaseConfig:
 
 
 class ProdConfig(BaseConfig):
+
     DEBUG = False
 
 
