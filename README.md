@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 ```
 # if you are not using mongo and jwt, forget these exports
-export MONGO_URI="<mongodb://<your_mongo_host>:27017/<your_database>"
+export MONGO_URI="mongodb://<your_mongo_host>:27017/<your_database>"
 export JWT_SECRET_KEY="<randomic_key>"
 python main.py
 ```
@@ -51,7 +51,7 @@ docker run -d \
 --name flask-app \
 -p 5000:5000 \
 # if you are not using mongo and jwt, remove the two lines below keeping the 'flask-app' line
--e MONGO_URI="<mongodb://<your_mongo_host>:27017/<your_database>" \
+-e MONGO_URI="mongodb://<your_mongo_host>:27017/<your_database>" \
 -e JWT_SECRET_KEY="<randomic_key>" \
 flask-app
 ```
