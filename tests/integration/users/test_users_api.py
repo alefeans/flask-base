@@ -14,7 +14,7 @@ def test_if_get_all_users_without_jwt_fails(client):
 
 
 @patch('flask_jwt_extended.view_decorators.verify_jwt_in_request')
-def test_get_single_user_endpoint(mock_jwt_required, client):
+def test_get_single_user_endpoint_with_fake_user(mock_jwt_required, client):
     response = client.get(f'/api/v1/users/54759eb3c090d83494e2d804')
     assert response.status_code == 404
 
