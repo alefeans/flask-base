@@ -1,4 +1,3 @@
-import json
 from unittest.mock import patch
 
 
@@ -25,29 +24,29 @@ def test_if_get_single_users_without_jwt_fails(client):
 
 
 @patch('flask_jwt_extended.view_decorators.verify_jwt_in_request')
-def test_create_and_delete_user_endpoints(mock_jwt_required, user_list, json_headers, client):
+def test_create_and_delete_user_endpoints(mock_jwt_required, user_list, client):
 
     def create_user(user):
         user.pop('id')
-        created = client.post('/api/v1/users/', data=json.dumps(user), headers=json_headers)
+        created = client.post('/api/v1/users/', json=user)
         assert created.status_code == 201
 
-        conflict = client.post('/api/v1/users/', data=json.dumps(user), headers=json_headers)
+        conflict = client.post('/api/v1/users/', json=user)
         assert conflict.status_code == 409
 
         user.pop('password')
         user_id = created.json.pop('id')
         assert user == created.json
 
-        bad = client.post('/api/v1/users/', data=json.dumps({'name': 'bla'}), headers=json_headers)
+        bad = client.post('/api/v1/users/', json={'name': 'bla'})
         assert bad.status_code == 400
 
         return user_id
 
     def delete_user(user_id):
-        response = client.delete(f'/api/v1/users/{user_id}', headers=json_headers)
+        response = client.delete(f'/api/v1/users/{user_id}')
         assert response.status_code == 204
-        response = client.delete(f'/api/v1/users/{user_id}', headers=json_headers)
+        response = client.delete(f'/api/v1/users/{user_id}')
         assert response.status_code == 404
 
     for user in user_list:

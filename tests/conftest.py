@@ -14,16 +14,6 @@ def client(scope='session'):
 
 
 @pytest.fixture
-def json_headers(scope='session'):
-    mimetype = 'application/json'
-    headers = {
-        'Content-Type': mimetype,
-        'Accept': mimetype
-    }
-    yield headers
-
-
-@pytest.fixture
 def user_list(scope='module'):
     """
     Reads the data from 'users.json' file,
