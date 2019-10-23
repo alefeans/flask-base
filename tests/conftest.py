@@ -5,16 +5,16 @@ from flask_restplus import marshal
 from app.v1.resources.users.serializers import create_user
 
 
-@pytest.fixture
-def client(scope='session'):
+@pytest.fixture(scope='session')
+def client():
     app = create_app()
     app.config['TESTING'] = True
     client = app.test_client()
     yield client
 
 
-@pytest.fixture
-def user_list(scope='module'):
+@pytest.fixture(scope='module')
+def user_list():
     """
     Reads the data from 'users.json' file,
     marshalling with the 'create_user' serializer.
