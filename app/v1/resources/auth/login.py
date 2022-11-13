@@ -15,7 +15,6 @@ class Login(Resource):
     @api.doc(responses={
         200: 'Success',
         400: 'Username or password is a required property',
-        404: 'User not found',
         401: 'Unauthorized'
     }, security=None)
     def post(self):
@@ -28,7 +27,7 @@ class Login(Resource):
         user = mongo.db.users.find_one({'username': username}, {'_id': 0})
 
         if not user:
-            api.abort(404, 'User not found')
+            api.abort(401, 'Unauthorized')
 
         if not check_password(password, user.get('password')):
             api.abort(401, 'Unauthorized')
