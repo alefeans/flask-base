@@ -3,15 +3,13 @@
 
 My template base to build Flask RESTful APIs using [Flask RESTPlus](https://flask-restplus.readthedocs.io/en/stable/index.html), [JWT Extended](https://flask-jwt-extended.readthedocs.io/en/latest/) and [PyMongo](https://flask-pymongo.readthedocs.io/en/latest/).
 
-You can just clone this repo and start to create/customize your own RESTful API using this code as your template base :)
+You can just clone this repo and start to create/customize your own RESTful API using this code as a template/example :)
 
-## JWT, PyMongo... Do i need all of this ???
+## JWT, PyMongo... Do I need all of these???
 
-__NO !__ You can remove JWT, PyMongo and Bcrypt (used for hashing users password on database), excluding all the references on the [app](app/__init__.py), [config](config.py) and the files that makes use of them.
+__NO!__ You can remove JWT, PyMongo and Bcrypt, excluding all the references on the [requirements.txt](requirements.txt), [app](app/__init__.py), [config](config.py) and all the dowstream files that makes use of them.
 
-These _"extensions"_ and the _users_ endpoints are there just to help you, if you need to implement all of the boilerplate required to work with JWT, PyMongo and so on.
-
-Don't forget to remove the dependencies from [requirements.txt](requirements.txt) too.
+These _"extensions"_ and the _users_ endpoints are there just to help you if you need to implement all of the required boilerplate to work with JWT, PyMongo and so on.
 
 # Getting Started
 
@@ -29,7 +27,7 @@ pip install -r requirements.txt
 ### Development
 
 ```
-# if you are not using mongo and jwt, forget these exports
+# only if you are using mongo and jwt
 export MONGO_URI="mongodb://<your_mongo_host>:27017/<your_database>"
 export JWT_SECRET_KEY="<randomic_key>"
 python run.py
@@ -58,14 +56,14 @@ flask-app
 
 ## Swagger
 
-After the application goes up, open your browser on `localhost:5000/api/v1/docs` to see the self-documented interactive API:
+When the application starts, open your browser on `localhost:5000/api/v1/docs` to see the self-documented interactive API:
 
 ![](/imgs/swagger.png)
 
 
 ## Project Structure
 
-The project structure is based on the official [Scaling your project](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-apis-with-reusable-namespaces) doc with some adaptations (e.g `v1` folder to agroup versioned resources).
+The project structure is based on the official [Scaling your project](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-apis-with-reusable-namespaces) doc with some adaptations (e.g `v1` folder to group versioned resources).
 
 
 ```
@@ -120,8 +118,8 @@ The project structure is based on the official [Scaling your project](https://fl
 ### Folders
 
 * `app` - All the RESTful API implementation is here.
-* `app/helpers` - Useful function/class helpers for all modules.
-* `app/v1` - Resource agroupment for all `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
+* `app/helpers` - Useful helpers for all modules.
+* `app/v1` - Resource groupment for all `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
 * `app/v1/resources` - All `v1` resources are implemented here.
 * `tests/unit` - Unit tests modules executed on the CI/CD pipeline.
 * `tests/integration` - Integration tests modules executed using a fake database on the CI/CD pipeline.
@@ -129,13 +127,13 @@ The project structure is based on the official [Scaling your project](https://fl
 
 ### Files
 
-* `app/__init__.py` - The Flask Application factory (`create_app()`) and it's configuration are done here. Your [Blueprints](https://flask-restplus.readthedocs.io/en/stable/scaling.html#use-with-blueprints) are registered here.
+* `app/__init__.py` - The Flask Application factory (`create_app()`) and its configuration is done here. Your [Blueprints](https://flask-restplus.readthedocs.io/en/stable/scaling.html#use-with-blueprints) are also registered here.
 * `app/v1/__init__.py` - The Flask RESTPlus API is created here with the versioned Blueprint (e.g `v1`). Your [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces) are registered here.
 * `config.py` - Config file for envs, global config vars and so on.
 * `Dockerfile` - Dockerfile used to build a Docker image (using [Docker Multistage Build](https://docs.docker.com/develop/develop-images/multistage-build/))
-* `LICENSE` - MIT License, i.e. you are free to do whatever is needed with the given code with no limits.
+* `LICENSE` - MIT License, i.e. you are free to do whatever you want with the given code with no limits.
 * `tox.ini` - Config file for tests using [Tox](https://tox.readthedocs.io/en/latest/index.html).
-* `.dockerignore` - Lists files and directories which should be ignored while Docker build process.
+* `.dockerignore` - Lists files and directories which should be ignored by the Docker build process.
 * `.gitignore` - Lists files and directories which should not be added to git repository.
 * `requirements.txt` - All project dependencies.
 * `run.py` - The Application entrypoint.
