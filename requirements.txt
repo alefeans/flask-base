@@ -42,5 +42,5 @@ tox==3.14.0
 urllib3==1.26.5
 virtualenv==16.7.5
 wcwidth==0.1.7
-Werkzeug==2.2.3
+Werkzeug==3.0.1
 zipp==0.6.0
